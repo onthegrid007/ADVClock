@@ -45,12 +45,12 @@ namespace std {
 
       _ADVClock() :
         m_begin(ClockType::now()) { }
-        
+      
       template<typename rtnType = long double, typename castType>
       static rtnType RuntimeCast(castType cast, Precision precision = Precision::Nanoseconds) {
           return RuntimeCastFromNano<rtnType>(duration_cast<nanoseconds>(cast), precision);
       }
-
+      
       template<typename rtnType = long double>
       static rtnType RuntimeCastFromNano(nanoseconds fromNanos, Precision precision = Precision::Nanoseconds) {
         #define divb1k(x) (x / rtnType(1000.0))
@@ -64,7 +64,7 @@ namespace std {
         #define weeks (days / DaysInWeek)
         #define years (days / DaysInYear)
         #define months (years / MonthsInYear)
-
+        
         switch((int)precision) {
           case Precision::Nanoseconds:
           return nanos;
@@ -108,16 +108,16 @@ namespace std {
       rtnType now(Precision precision = Precision::Nanoseconds) {
           return RuntimeCast<rtnType>(nowDur(), Precision::Nanoseconds);
       }
-
+      
       nanoseconds elapsedRawNanoDur(bool tareClock = false) {
         auto rtn = nowDur() - beginDur();
-        tareClock ? tare() : void(0);
+        if(tareClock) tare();
         return rtn;
       }
       
       int64_t elapsedRawNano(bool tareClock = false) {
         int64_t rtn = elapsedRawNanoDur().count();
-        tareClock ? tare() : void(0);
+        if(tareClock) tare();
         return rtn;
       }
 
@@ -132,14 +132,13 @@ namespace std {
 
       private:
       _Timestamp<ClockType> m_begin;
-      inline static const _ADVClock<ClockType> GLOBAL_CLOCK = _ADVClock<ClockType>();
+      inline static constexpr _ADVClock<ClockType> GLOBAL_CLOCK = _ADVClock<ClockType>();
     };
     typedef _ADVClock<GlobalClockType> ADVClock;
     // typedef _ADVClock::_ADVClock<_ADVClock::ClockType> GCTypename;
     // template<> inline const GCTypename GCTypename::GLOBAL_CLOCK;
   }
 }
-
 
 // template<> inline const std::chrono::_ADVClock<std::chrono::_ADVClock::ClockType> std::chrono::_ADVClock::GLOBAL_CLOCK;
 
