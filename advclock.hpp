@@ -15,9 +15,9 @@
   typedef std::chrono::high_resolution_clock GlobalClockType;
 #endif
 
-inline const _Timestamp<GlobalClockType, __uint128_t> GLOBAL_CLOCK{};// = _Timestamp<ClockType, __uint128_t>();s
+inline const _Timestamp<GlobalClockType, __uint128_t> GLOBAL_CLOCK{};
 
-template<typename C = GlobalClockType, typename T = uint64_t, typename D = std::chrono::duration<T, std::nano>>
+template<typename C = GlobalClockType, typename T = std::uint64_t, typename D = std::chrono::duration<T, std::nano>>
 class _ADVClock : public _Timestamp<C, T, D> {
   public:
   typedef C ClockType;
@@ -26,7 +26,7 @@ class _ADVClock : public _Timestamp<C, T, D> {
   _ADVClock() : TS(std::chrono::time_point_cast<Duration>(ClockType::now())) { }
   explicit constexpr _ADVClock(const TS& ts) : TS(ts) { }
   
-  enum Precision : uint8_t {
+  enum Precision : std::uint8_t {
     NanoS = 0,
     MicroS = 1,
     MilliS = 2,
