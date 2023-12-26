@@ -40,7 +40,7 @@ class _ADVClock : public _Timestamp<C, T, D> {
   };
   
   const typename TS::Duration beginDur() const {
-    return std::chrono::duration_cast<TS::Duration>(this->TS) - GLOBAL_CLOCK;
+    return *this - GLOBAL_CLOCK;
   }
   
   const typename TS::Duration nowDur() const {
