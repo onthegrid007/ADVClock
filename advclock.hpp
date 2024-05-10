@@ -1,6 +1,6 @@
 /*
 *   BSD 3-Clause License, see file labled 'LICENSE' for the full License.
-*   Copyright (c) 2023, Peter Ferranti
+*   Copyright (c) 2024, Peter Ferranti
 *   All rights reserved.
 */
 
@@ -15,7 +15,7 @@
   typedef std::chrono::high_resolution_clock GlobalClockType;
 #endif
 
-inline const _Timestamp<GlobalClockType, __uint128_t> GLOBAL_CLOCK{};
+inline const _Timestamp<GlobalClockType, std::uint64_t> GLOBAL_CLOCK{};
 
 template<typename C = GlobalClockType, typename T = std::uint64_t, typename D = std::chrono::duration<T, std::nano>>
 class _ADVClock : public _Timestamp<C, T, D> {
