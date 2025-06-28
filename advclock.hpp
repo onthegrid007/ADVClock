@@ -111,7 +111,7 @@ class _ADVClock : public _Timestamp<C, T, D> {
 		return ElapsedRuntimeCast<_RtnT, __T>(elapsedDur(tareClock), p);
 	}
 
-	static const std::string GetDate(const std::string& fmt) {
+	static const std::string GetDateTime(const std::string& fmt) {
 		const auto time{std::chrono::system_clock::to_time_t(std::chrono::system_clock::now())};
 		std::stringstream ss;
 		ss << std::put_time(std::localtime(&time), fmt.c_str());
