@@ -47,7 +47,7 @@ class _ADVClock : public _Timestamp<C, T, D> {
 		return ClockType::now() - GLOBAL_CLOCK; 
 	}
 
-	void tare() { *static_cast<TS::TP*>(this) = ClockType::now(); }
+	void tare() { *static_cast<typename TS::TP*>(this) = ClockType::now(); }
 
 	const typename TS::Duration elapsedDur(const bool tareClock) {
 		const auto rtn{nowDur() - beginDur()};
