@@ -56,7 +56,7 @@ class _ADVClock : public _Timestamp<C, T, D> {
 	}
 
 	const T elapsed(const bool tareClock) {
-	return elapsedDur(tareClock).count();
+		return elapsedDur(tareClock).count();
 	}
   
 	template<typename __RtnT, typename __T = uint64_t>
