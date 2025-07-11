@@ -59,56 +59,56 @@ class _ADVClock : public _Timestamp<C, T, D> {
 		return elapsedDur(tareClock).count();
 	}
   
-	template<typename __RtnT, typename __T = uint64_t>
-	static const __RtnT elapsedRuntimeCast(std::chrono::duration<__T, std::nano> cast, Precision&& p = Precision::NanoS) {
-		typedef __RtnT RT;
-		typedef __T Type;
-		#define __SecsInMin 60
-		#define __MinsInHour 60
-		#define __HoursInDay 24
-		#define __DaysInWeek 7
-		#define __DaysInYear 365.24
-		#define __MonthsInYear 12
-		#define __divb1k(__x) (__x / RT(1000.0))
-		#define __nanos Type(cast.count())
-		#define __micros __divb1k(__nanos)
-		#define __millis __divb1k(__micros)
-		#define __secs __divb1k(__millis)
-		#define __mins (__secs / __SecsInMin)
-		#define __hours (__mins / __MinsInHour)
-		#define __days (__hours / __HoursInDay)
-		#define __weeks (__days / __DaysInWeek)
-		#define __years (__days / __DaysInYear)
-		#define __months (__years / __MonthsInYear)
+	template<typename _ADVC_RtnT, typename _ADVC_T = uint64_t>
+	static const _ADVC_RtnT elapsedRuntimeCast(std::chrono::duration<_ADVC_T, std::nano> cast, Precision&& p = Precision::NanoS) {
+		typedef _ADVC_RtnT RT;
+		typedef _ADVC_T Type;
+		#define _ADVC_SecsInMin 60
+		#define _ADVC_MinsInHour 60
+		#define _ADVC_HoursInDay 24
+		#define _ADVC_DaysInWeek 7
+		#define _ADVC_DaysInYear 365.24
+		#define _ADVC_MonthsInYear 12
+		#define _ADVC_divb1k(_ADVC_x) (_ADVC_x / RT(1000.0))
+		#define _ADVC_nanos Type(cast.count())
+		#define _ADVC_micros _ADVC_divb1k(_ADVC_nanos)
+		#define _ADVC_millis _ADVC_divb1k(_ADVC_micros)
+		#define _ADVC_secs _ADVC_divb1k(_ADVC_millis)
+		#define _ADVC_mins (_ADVC_secs / _ADVC_SecsInMin)
+		#define _ADVC_hours (_ADVC_mins / _ADVC_MinsInHour)
+		#define _ADVC_days (_ADVC_hours / _ADVC_HoursInDay)
+		#define _ADVC_weeks (_ADVC_days / _ADVC_DaysInWeek)
+		#define _ADVC_years (_ADVC_days / _ADVC_DaysInYear)
+		#define _ADVC_months (_ADVC_years / _ADVC_MonthsInYear)
 		switch(p) {
 			case Precision::NanoS:
-			return __nanos;
+			return _ADVC_nanos;
 			case Precision::MicroS:
-			return __micros;
+			return _ADVC_micros;
 			case Precision::MilliS:
-			return __millis;
+			return _ADVC_millis;
 			case Precision::Seconds:
-			return __secs;
+			return _ADVC_secs;
 			case Precision::Minutes:
-			return __mins;
+			return _ADVC_mins;
 			case Precision::Hours:
-			return __hours;
+			return _ADVC_hours;
 			case Precision::Days:
-			return __days;
+			return _ADVC_days;
 			case Precision::Weeks:
-			return __weeks;
+			return _ADVC_weeks;
 			case Precision::Months:
-			return __months;
+			return _ADVC_months;
 			case Precision::Years:
-			return __years;
+			return _ADVC_years;
 			default:
-			return __nanos;
+			return _ADVC_nanos;
 		};
 	};
 
-	template<typename _RtnT, typename __T = uint64_t>
+	template<typename _RtnT, typename _ADVC_T = uint64_t>
 	const _RtnT elapsedRuntimeCast(Precision&& p = Precision::NanoS, const bool tareClock = false) {
-		return ElapsedRuntimeCast<_RtnT, __T>(elapsedDur(tareClock), p);
+		return ElapsedRuntimeCast<_RtnT, _ADVC_T>(elapsedDur(tareClock), p);
 	}
 
 	static const std::string GetDateTime(const std::string& fmt) {
